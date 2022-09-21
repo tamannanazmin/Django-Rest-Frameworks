@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'hrm',
     'rest_framework',
+    'rest_framework.authtoken',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -119,6 +120,18 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+REST_FRAMEWORK ={
+    'DEFAULT_PERMISSION_CLASSES':[
+        'rest_framework.permissions.IsAuthenticated',#look for the permission
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES':(
+        'rest_framework.authentication.BasicAuthentication',#USER and Password based
+        'rest_framework.authentication.SessionAuthentication',#
+        'rest_framework.authentication.TokenAuthentication',#python requestion library
+
+    )
+
+}
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
