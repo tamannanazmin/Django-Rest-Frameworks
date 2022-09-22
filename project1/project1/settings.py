@@ -120,19 +120,20 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+
+# Default primary key field type
+# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK ={
     'DEFAULT_PERMISSION_CLASSES':[
         'rest_framework.permissions.IsAuthenticated',#look for the permission
     ],
     'DEFAULT_AUTHENTICATION_CLASSES':(
         'rest_framework.authentication.BasicAuthentication',#USER and Password based
-        'rest_framework.authentication.SessionAuthentication',#
+        'rest_framework.authentication.SessionAuthentication',#if one tab is logged in then other tab will also be logged in
         'rest_framework.authentication.TokenAuthentication',#python requestion library
 
     )
 
 }
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
