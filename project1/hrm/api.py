@@ -5,7 +5,13 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializers import *
 
-
+class UserAuthentication(ObtainAuthToken):
+    def post(self, request, *args, **kwargs):
+        serializers=self.serializer_class(data=request.data, context={'request': request})
+        serializers.is_valid(raise_exception=True)
+        user=serializers.validated_data['user']
+        token,created=Token.objects.get_or_create(user=user)
+        return Response(token.key)
 class UserList(APIView):
     def get(self,request):
         model= Users.objects.all()
