@@ -6,12 +6,12 @@ from rest_framework import status
 from .serializers import *
 
 class UserAuthentication(ObtainAuthToken):
-    def post(self, request, *args, **kwargs):
-        serializers=self.serializer_class(data=request.data, context={'request': request})
-        serializers.is_valid(raise_exception=True)
-        user=serializers.validated_data['user']
+    def post(self, request, *args, **kwargs):#only post , no get method
+        serializer =self.serializer_class(data=request.data, context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        user=serializer.validated_data['user']
         token,created=Token.objects.get_or_create(user=user)
-        return Response(token.key)
+        return Response(token.key)#every user has a token key, if you know the token key then you can access the data
 class UserList(APIView):
     def get(self,request):
         model= Users.objects.all()
