@@ -59,5 +59,16 @@ def edit_data(employee_id):
     response.raise_for_status()  # raises exception when not a 2xx response
     if response.status_code != 204:
         print(response.text, response.status_code)
-edit_data(2)
+#edit_data(2)
 
+def delete_data(employee_id):
+    # this can be used to delete data
+    url = f"{URL}/api/users_list/{employee_id}/"
+    header = {'Authorization': f'Token {get_token()}'}
+    response = requests.delete(url, headers=header)
+    #response.raise_for_status()  # raises exception when not a 2xx response
+    #if response.status_code != 204:
+    print(response.status_code)
+
+'''for e in range(5,20):
+    delete_data(e)'''
