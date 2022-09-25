@@ -24,17 +24,21 @@ def get_data():
     for e in emp_data:
         print(e)
     #print(response.json())
-get_data()
-def create_new(count):# using this you can entry data as much as you want at the same time other than one by one
-    url=f"{URL}/api/user_list/"
-    header= {'Authorization': f'Token{get_token()}'}
-    data={
-        "employee_id": f"HQ00{count}",
-        "name": "Raziv",
-        "age": 28,
-        "ranking": 2.4
+#get_data()
+def create_new():
+    # using this you can entry data as much as you want at the same time other than one by one
+    url = "http://127.0.0.1:8000/api/users_list/"
+    header = {'Authorization': f'Token {get_token()}'}
+    data = {
+        "employee_id": "HQ005",
+        "name": "Prashun Roy",
+        "age": 30,
+        "ranking": 0.5
+        #"photo": "/hrm/photo/download.jfif",
+        #"resume": "/hrm/file/download.jfif"
     }
-    response=requests.post(url, data=data, headers=header)
-    print(response.text)
-for e in range(20):
-    create_new(e)
+    response = requests.post(url, data=data, headers=header)
+    response.raise_for_status()  # raises exception when not a 2xx response
+    if response.status_code != 204:
+        print(response.text)
+create_new()
