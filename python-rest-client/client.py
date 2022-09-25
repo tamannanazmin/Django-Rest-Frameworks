@@ -41,7 +41,23 @@ def create_new(count):
     response.raise_for_status()  # raises exception when not a 2xx response
     if response.status_code != 204:
         print(response.text)
-for e in range(7, 20):
-    create_new(e)
+'''for e in range(7, 20):
+    create_new(e)'''
 
-    
+def edit_data(employee_id):
+    # this can be used to update data
+    url = f"{URL}/api/users_list/{employee_id}/"
+    header = {'Authorization': f'Token {get_token()}'}
+    data = {
+        "name": "Editing data",
+        "age": 30,
+        "ranking": 0.5,
+        #"photo": "/hrm/photo/download.jfif",
+        #"resume": "/hrm/file/download.jfif"
+    }
+    response = requests.put(url, data=data, headers=header)
+    response.raise_for_status()  # raises exception when not a 2xx response
+    if response.status_code != 204:
+        print(response.text, response.status_code)
+edit_data(2)
+
