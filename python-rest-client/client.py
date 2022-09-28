@@ -24,7 +24,7 @@ def get_data():
     for e in emp_data:
         print(e)
     #print(response.json())
-#get_data()
+get_data()
 def create_new(count):
     # using this you can entry data as much as you want at the same time other than one by one
     url = f"{URL}/api/users_list/"
@@ -41,8 +41,8 @@ def create_new(count):
     response.raise_for_status()  # raises exception when not a 2xx response
     if response.status_code != 204:
         print(response.text)
-'''for e in range(7, 20):
-    create_new(e)'''
+#for e in range(30):
+    create_new(30)
 
 def edit_data(employee_id):
     # this can be used to update data
